@@ -1,10 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Project_MVC.Context_DataBase;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<ContextDb>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Не удалось подключиться к базе данных либо она не создана")));
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
 
 
 app.UseHttpsRedirection();

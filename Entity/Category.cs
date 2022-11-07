@@ -9,6 +9,6 @@ namespace Project_MVC.Entity
         [Required]
         [DisplayName("Категория")]
         public string? Title_Category { get; set; }
-        public List<User> User { get; set; }
+        public List<User>? User { get; set; }
     }
 }
