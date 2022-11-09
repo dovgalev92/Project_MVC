@@ -1,0 +1,68 @@
+﻿@model Project_MVC.Models.CreateModel
+@{
+    ViewData["Title"] = "Окно добавление гражданина";
+}
+<h1 class="teg-h1-center">ФОРМА ЗАПОЛНЕНИЯ ДАННЫХ</h1>
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-4">
+        <form class="form-center">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-groupe-form">
+            <input type="text" asp-for="@Model.User.Surname" class="form-controles-create" required />
+            <label asp-for="User.Surname">Фамилия:</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <input type="text" asp-for="@Model.User.Name" class="form-controles-create" required />
+            <label asp-for="User.Name">Имя:</label>
+        </div>
+        <br/>
+        <div class="form-groupe-form">
+            <input type="text" asp-for="@Model.User.Patronymic" class="form-controles-create" required />
+            <label asp-for="User.Patronymic">Отчество(если таково имеется):</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <input type="date" asp-for="@Model.User.Birth_Day" class="form-controles-create" required />
+            <label asp-for="User.Birth_Day">Год рождения</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <select id="lst_locality" class="form-controles-create" asp-for="@Model.User.LocalityId" asp-items="@Model.Locality" required>
+                <option selected>выберите населенный пункт</option>
+            </select>
+            <label asp-for="User.LocalityId">Населенный пункт</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <select id="lstStreet" class="form-controles-create" asp-for="User.StreetId" asp-items="@Model.Street" required>
+                <option></option>
+            </select>
+            <label asp-for="User.StreetId">Улица:</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <select  class="form-controles-create" asp-for="User.CategoryId" asp-items="@Model.Category" required>
+            </select>
+            <label asp-for="User.CategoryId">Категория:</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <input type="text" asp-for="User.Number_Haus" class="form-controles-create" required />
+            <label asp-for="User.Number_Haus">Номер дома</label>
+        </div>
+        <br />
+        <div class="form-groupe-form">
+            <input type="text" asp-for="User.Status_Visits" class="form-controles-create" />
+            <label asp-for="User.Status_Visits">Статус посещения</label>
+        </div>
+        <br />
+        <div class="text-center">
+            <input type="submit" value="Добавить" class="btn-main-create">
+            <a asp-action="List_User" class="btn-main">К списку граждан</a>
+        </div>
+        </form>
+    </div>
+</div>

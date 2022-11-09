@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_MVC.Context_DataBase;
+using Project_MVC.Entity;
 using Project_MVC.Models;
 
 namespace Project_MVC.Controllers
@@ -25,6 +26,21 @@ namespace Project_MVC.Controllers
                 return View(await result_search.ToListAsync());
             }
             return View(await context.Users.Include(c => c.Category).Include(l => l.Locality).Include(s => s.Street).ToListAsync());
+        }
+        public IActionResult Create()
+        {
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(List_User));
+            }
+            return View(model);
         }
     }
 }
