@@ -8,16 +8,14 @@ namespace Project_MVC.Controllers
     public class ListUserController : Controller
     {
         private readonly ContextDb context;
-        public CreateModel model;
+        public CreateModel model = new CreateModel();
 
-
-        public ListUserController(ContextDb _context, CreateModel model)
+        public ListUserController(ContextDb _context)
         {
             context = _context;
-            this.model = model;
         }
 
-        public async Task<IActionResult> ListUser(string search)
+        public async Task<IActionResult> List_User(string search)
         {
             var result_search = from user in context.Users select user;
             if (!string.IsNullOrWhiteSpace(search))

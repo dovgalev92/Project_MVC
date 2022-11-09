@@ -16,3 +16,189 @@ html {
 body {
   margin-bottom: 60px;
 }
+.btn-main-create {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1px;
+    color: white;
+    background-color: green;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.create-form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.form-control-search {
+    display: block;
+    width: 250px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-groupe-form {
+    position: relative;
+}
+
+.form-controles-text {
+    width: 100%;
+    display: block;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 9px 10px;
+    font-size: 14px;
+    transition: all .09s ease-out;
+}
+
+label {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    cursor: text;
+    font-size: 15px;
+    background-color: white;
+}
+
+.form-controles-text:focus {
+    outline: none;
+    border-color: coral;
+    box-shadow: 0 0 5px rgba(255, 127, 88 .6);
+}
+
+    .form-controles-text:focus ~ label {
+        top: -11px;
+        color: coral;
+    }
+
+.form-controles-text:valid ~ label {
+    top: -11px;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: white;
+    background-color: coral;
+    text-decoration: none;
+    border: none;
+    border-radius: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-center {
+    position: absolute;
+    top: 200px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 600px;
+}
+
+.form-controle-text:focus ~ label {
+    top: -11px;
+    color: coral;
+}
+
+.form-controles-create {
+    width: 100%;
+    display: block;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 9px 10px;
+    font-size: 14px;
+    transition: all .09s ease-out;
+}
+
+    .form-controles-create:focus ~ label {
+        top: -11px;
+        color: green;
+    }
+
+.btn-main-create {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: white;
+    background-color: green;
+    text-decoration: none;
+    border: none;
+    border-radius: 20px;
+}
+
+.form-controles-create:focus {
+    outline: none;
+    border-color: green;
+    box-shadow: 0 0 5px rgba(255, 127, 88 .6);
+}
+
+.form-controles-create:valid ~ label {
+    top: -11px;
+}
+
+.btn-main-create:hover {
+    color: white;
+}
+
+.btn-main:hover {
+    color: white;
+}
+
+.form-search {
+    width: 20%;
+    display: block;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 9px 10px;
+    font-size: 14px;
+    transition: all .09s ease-out;
+}
+
+    .form-search:focus {
+        outline: none;
+        border-color: green;
+        box-shadow: 0 0 5px rgba(255, 127, 88 .6);
+    }
+
+.btn-center {
+    text-align: center;
+}
+
+.bi:nth-child(n+11) {
+    display: none;
+}
+
+.bi.is-visible {
+    display: block;
+}
+
+#multipleSelect {
+    max-width: 100%;
+    width: 600px;
+}
+
+.vscomp-toggle-button {
+    padding: 10px 30px 10px 10px;
+    border-radius: 5px;
+}
