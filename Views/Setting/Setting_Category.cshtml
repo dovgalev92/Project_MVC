@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Настройка категорий";
+}
+
+<h1 class="teg-h1-center">Настройки приложения</h1>
+<br />
+<h4 class="teg-h1-center">Добавьте список категорий</h4>
+<br />
+<body>
+    <div class="row">
+        <div class="col-lg-4">
+            <form asp-action="Setting_Category" class="form-center">
+                <div>
+                    <div class="form-groupe-form">
+                        <input type="text" name="Title_Category" class="form-controles-text" required>
+                        <label>Категория</label>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <input type="submit" class="btn-main" value="Добавить">
+                        <a asp-action="" class="btn-main">Назад</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Список населенных пунктов";
+}
+<h1 class="teg-h1-center">Настройки приложения</h1>
+<br />
+<h4 class="text-center">Добавьте список населенных пунктов Вашего сельского совета</h4>
+<body>
+    <div class="row">
+        <div class="col-lg-4">
+            <form asp-action="Setting_Locality" class="form-center">
+                <div>
+                    <div class="form-groupe-form">
+                        <input type="text" name="Title_Locality" class="form-controles-text" required>
+                        <label>Название населенного пункта</label>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <input type="submit" class="btn-main" value="Добавить">
+                        <a asp-action="Index" class="btn-main" class="text-center">Назад</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>

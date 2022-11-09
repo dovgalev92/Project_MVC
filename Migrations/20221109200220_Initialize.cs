@@ -59,7 +59,7 @@ namespace Project_MVC.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title_Loacality = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Title_Locality = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

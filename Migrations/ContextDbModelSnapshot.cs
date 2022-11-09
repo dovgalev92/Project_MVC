@@ -94,7 +94,7 @@ namespace Project_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Title_Loacality")
+                    b.Property<string>("Title_Locality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

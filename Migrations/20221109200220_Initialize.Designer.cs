@@ -12,7 +12,7 @@ using Project_MVC.Context_DataBase;
 namespace Project_MVC.Migrations
 {
     [DbContext(typeof(ContextDb))]
-    [Migration("20221107212204_Initialize")]
+    [Migration("20221109200220_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace Project_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Title_Loacality")
+                    b.Property<string>("Title_Locality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
