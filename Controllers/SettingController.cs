@@ -47,7 +47,6 @@ namespace Project_MVC.Controllers
             {
                 context.Streets.Add(street);
                 await context.SaveChangesAsync();
-                Results.Ba
             }
             return RedirectToAction(nameof(Setting_Street));
         }
@@ -65,6 +64,7 @@ namespace Project_MVC.Controllers
             }
             return View();
         }
+       
     }
 
 }

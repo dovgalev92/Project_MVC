@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project_MVC.Context_DataBase;
 using Project_MVC.Entity;
@@ -27,8 +28,9 @@ namespace Project_MVC.Controllers
             }
             return View(await context.Users.Include(c => c.Category).Include(l => l.Locality).Include(s => s.Street).ToListAsync());
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await GetData_DBContext(true);
             return View(model);
         }
         [HttpPost]
@@ -42,5 +44,52 @@ namespace Project_MVC.Controllers
             }
             return View(model);
         }
+
+        public IEnumerable<SelectListItem> GetStreet(int? ID)
+        {
+            if(ID != 0)
+            {
+                List<SelectListItem> selects_street = context.Streets.Where(s => s.LocalityId == ID).OrderBy(n => n.Title_Street)
+                    .Select(n => new SelectListItem()
+                    {
+                        Value = n.Id.ToString(),
+                        Text = n.Title_Street
+                    }).ToList();
+                 
+                return selects_street;
+            }
+            return Enumerable.Empty<SelectListItem>();
+
+        }
+        public async Task GetData_DBContext(bool action)
+        {
+            if (action)
+            {
+                model.User = new User();
+                List<SelectListItem> locality = await context.Localities.OrderBy(n => n.Title_Locality)
+                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Locality }).ToListAsync();
+                model.Locality = locality;
+
+                List<SelectListItem> category = await context.Categories.OrderBy(n => n.Title_Category)
+                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
+                model.Category = category;
+
+                model.Street = new List<SelectListItem>();
+            }
+            else
+            {
+                List<SelectListItem> locality = await context.Localities.OrderBy(n => n.Title_Locality)
+                   .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Locality }).ToListAsync();
+                model.Locality = locality;
+
+                List<SelectListItem> category = await context.Categories.OrderBy(n => n.Title_Category)
+                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
+                model.Category = category;
+
+                List<SelectListItem> street = await context.Streets.OrderBy(n => n.Title_Street)
+                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Street }).ToListAsync();
+                model.Street = street;
+            }
+        } // метод, который подтягивает данные с бд
     }
 }

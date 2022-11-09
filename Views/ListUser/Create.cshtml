@@ -7,7 +7,7 @@
 <br />
 <div class="row">
     <div class="col-lg-4">
-        <form class="form-center">
+        <form class="form-center" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-groupe-form">
             <input type="text" asp-for="@Model.User.Surname" class="form-controles-create" required />
@@ -66,3 +66,36 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#lst_locality').change(function () {
+                var selectedLocality = $('#lst_locality').val();
+                var streetSelect = $('#lstStreet');
+                streetSelect.empty();
+                if (selectedLocality != null && selectedLocality != '') {
+                    $.getJSON('@Url.Action("GetStreet")', { ID: selectedLocality },
+                        function (streetse) {
+                            if (streetse != null && !jQuery.isEmptyObject(streetse)) {
+                                streetSelect.append($('<option/>', {
+                                    value: null,
+                                    text: "Выберите населенный пункт"
+                                }));
+                                $.each(streetse, function (index, street) {
+                                    streetSelect.append($('<option/>', {
+                                        value: street.value,
+                                        text: street.text
+                                    }));
+                                });
+                            };
+                        });
+                }
+            });
+        });
+    </script>
+}

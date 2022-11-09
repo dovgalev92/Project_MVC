@@ -20,7 +20,8 @@ namespace Project_MVC.Entity
         public string? Patronymic { get; set; }
         [Required]
         [DisplayName("Дата рождения")]
-        public DateTime Birth_Day { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? Birth_Day { get; set; }
         [Required]
         [DisplayName("Номер дома")]
         public string? Number_Haus { get; set; }
