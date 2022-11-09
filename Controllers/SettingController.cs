@@ -47,8 +47,7 @@ namespace Project_MVC.Controllers
             {
                 context.Streets.Add(street);
                 await context.SaveChangesAsync();
-                Results.BadRequest("Данные успешно добавлены");
-                await Task.Delay(3000);
+                Results.Ba
             }
             return RedirectToAction(nameof(Setting_Street));
         }
