@@ -113,5 +113,13 @@ namespace Project_MVC.Controllers
             }
             return View(user);
         }
+        public async Task<IActionResult> Delete_User(int? id)
+        {
+            var user_del = await context.Users.FindAsync(id);
+            context.Users.Remove(user_del);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(List_User));
+        }
+        
     }
 }

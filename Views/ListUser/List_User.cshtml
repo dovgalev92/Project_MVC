@@ -52,6 +52,14 @@
                     <td>@Html.DisplayFor(list => user.Status_Visits)</td>
                     <td align="center">
                         <a asp-action="Data_Update" asp-route-id="@user.User_Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModel-@user.User_Id" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+
+
+                        <!--Модальное окно-->
+                        <!--Кнопка удалить Delete-->
+                        <div class="modal fade" id="exampleModel-@user.User_Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
+
                     </td>
                 </tr>
                 }
