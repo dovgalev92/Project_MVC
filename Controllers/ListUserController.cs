@@ -86,10 +86,32 @@ namespace Project_MVC.Controllers
                     .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
                 model.Category = category;
 
+
                 List<SelectListItem> street = await context.Streets.OrderBy(n => n.Title_Street)
                     .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Street }).ToListAsync();
                 model.Street = street;
             }
         } // метод, который подтягивает данные с бд
+        public async Task<IActionResult> Data_Update(int? id)
+        {
+            model.User = await context.Users.FirstOrDefaultAsync(u => u.User_Id == id);
+            await GetData_DBContext(false);
+            if(model.User!= null)
+            {
+                return View(model);
+            }
+            return View(nameof(List_User));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Data_Update(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Update(user);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(List_User));
+            }
+            return View(user);
+        }
     }
 }
