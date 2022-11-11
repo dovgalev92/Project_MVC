@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Список граждан";
 }
+<head>
+    <script src="https://kit.fontawesome.com/b8991598b2.js"></script>
+</head>
 <h1 style="text-align:center;">Список граждан</h1>
 <hr />
 
@@ -17,7 +20,11 @@
     <br />
     <p>
         <form style="display:flex" asp-controller="ListUser" asp-action="List_User">
-            <input type="text" name="search" class="form-search" placeholder="Давай помогу найти" /> <input type="submit" style="margin-left:10px" class="btn-main-create" value="Поиск" />
+            <div class="search-box">
+                <input type="text" name="search" class="search-txt" placeholder="Давай помогу найти" /> 
+                <input type="submit" class="search-btn" value="<i class="fas fa-search"></i> /"
+            </div>
+            
         </form>
     <p />
     <table class="table table-bordered" style="border-color: #000">

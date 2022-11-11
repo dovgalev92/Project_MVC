@@ -205,3 +205,41 @@ label {
 .teg-h1-center {
     text-align: center;
 }
+.search-box{
+    position:absolute;
+    transform: translate(0%,-65%);
+    background:#2f3640;
+    height:40px;
+    border-radius:40px;
+    padding:9px;
+}
+.search-btn{
+    color: #1da1f3;
+    float:right;
+    width:40px;
+    height:20px;
+    border-radius:50%;
+    background: #2f3640;
+    display: flex;
+    justify-content:center;
+    text-decoration:none;
+}
+.search-box:hover > .search-txt{
+    width:180px;
+    padding:0 6px;
+}
+
+.search-txt{
+    border:none;
+    background:none;
+    outline:none;
+    float:left;
+    padding:0;
+    color:darkseagreen;
+    font-size:18px;
+    transition:0.4s;
+    line-height:23px;
+    width:0px;
+    transition: 0.4s;
+
+}
