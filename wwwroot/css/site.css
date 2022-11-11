@@ -209,15 +209,15 @@ label {
     position:absolute;
     transform: translate(0%,-65%);
     background:#2f3640;
-    height:40px;
-    border-radius:40px;
-    padding:9px;
+    height:37px;
+    border-radius:70px;
+    padding:10px;
 }
 .search-btn{
     color: #1da1f3;
-    float:right;
+    float:none;
     width:40px;
-    height:20px;
+    height:15px;
     border-radius:50%;
     background: #2f3640;
     display: flex;
@@ -226,7 +226,7 @@ label {
 }
 .search-box:hover > .search-txt{
     width:180px;
-    padding:0 6px;
+    padding:0 5px;
 }
 
 .search-txt{
@@ -234,9 +234,9 @@ label {
     background:none;
     outline:none;
     float:left;
-    padding:0;
-    color:darkseagreen;
-    font-size:18px;
+    padding:0px;
+    color:white;
+    font-size:17px;
     transition:0.4s;
     line-height:23px;
     width:0px;
