@@ -53,6 +53,8 @@
                     <td align="center">
                         <a asp-action="Data_Update" asp-route-id="@user.User_Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModel-@user.User_Id" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        <a asp-action="Viewing_Date" asp-route-id="@user.User_Id" class="btn btn-success"><i class="bi bi-chat-square-text"></i></a>
+                        <a asp-action="Add_DateOfVisits"  class="btn btn-info"><i class="bi bi-calendar-date-fill"></i></a>
 
 
                         <!--Модальное окно-->
@@ -65,14 +67,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <h4>Вы действительно хотите удалить <b>@user.Surname @user.Name @user.Patronymic?<b/></h4>
-                                        <h5>Подтвердив данное действие, данные будут утеряны</h5>
+                                        <p>Вы действительно хотите удалить <b>@user.Surname @user.Name @user.Patronymic?<b/></p>
+                                        <p>Подтвердив данное действие, данные будут утеряны</p>
                                     </div>
                                     <div class="modal-footer">
                                         <form asp-action="Delete_User">
                                             <input type="hidden" name="id" value="@user.User_Id" />
                                             <input type="submit" class="btn btn-primary" value="Удалить" />
-                                            <input type="submit" class="btn btn-secondary" data-bs-dismiss="modal" value="Отменить" />
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
                                         </form>
                                     </div>
                                 </div>

@@ -120,6 +120,27 @@ namespace Project_MVC.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(List_User));
         }
-        
+       
+        public async Task<IActionResult> Viewing_Date(int? id)
+        {
+            var list_date = from date in context.DataVisits.Where(i => i.UserId == id) select date;
+            return View(list_date); 
+        }
+        public IActionResult Add_DateOfVisits()
+        {
+            ViewData["Users"] = new SelectList(context.Set<User>(),"User_Id", "Surname");
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add_DateOfVisits(DataVisits data)
+        {
+            if (ModelState.IsValid)
+            {
+                context.DataVisits.Add(data);
+                await context.SaveChangesAsync();
+            }
+            return View(data);
+        }
+
     }
 }

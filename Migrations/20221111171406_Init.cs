@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project_MVC.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,21 +20,6 @@ namespace Project_MVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DataVisits",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DataVisits", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,7 +86,6 @@ namespace Project_MVC.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     LocalityId = table.Column<int>(type: "int", nullable: true),
                     StreetId = table.Column<int>(type: "int", nullable: true),
-                    DataVisitsId = table.Column<int>(type: "int", nullable: true),
                     HauseDetailsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -111,11 +95,6 @@ namespace Project_MVC.Migrations
                         name: "FK_Users_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Users_DataVisits_DataVisitsId",
-                        column: x => x.DataVisitsId,
-                        principalTable: "DataVisits",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Hause_Details_HauseDetailsId",
@@ -134,6 +113,32 @@ namespace Project_MVC.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DataVisits",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DataVisits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DataVisits_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "User_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DataVisits_UserId",
+                table: "DataVisits",
+                column: "UserId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Streets_LocalityId",
                 table: "Streets",
@@ -143,11 +148,6 @@ namespace Project_MVC.Migrations
                 name: "IX_Users_CategoryId",
                 table: "Users",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_DataVisitsId",
-                table: "Users",
-                column: "DataVisitsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_HauseDetailsId",
@@ -168,13 +168,13 @@ namespace Project_MVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DataVisits");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "DataVisits");
 
             migrationBuilder.DropTable(
                 name: "Hause_Details");

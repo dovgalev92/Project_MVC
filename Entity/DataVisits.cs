@@ -12,6 +12,6 @@ namespace Project_MVC.Entity
         [DisplayName("Заметки")]
         public string? Notes { get; set; }
         public int UserId { get; set; }
-        public List<User>? User { get; set; }
+        public User? User { get; set; }
     }
 }

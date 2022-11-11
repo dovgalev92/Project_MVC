@@ -33,7 +33,7 @@ namespace Project_MVC.Entity
         public Locality? Locality { get; set; }
         public int? StreetId { get; set; }
         public Street? Street { get; set; }
-        public DataVisits? DataVisits { get; set; }
+        public List<DataVisits>? DataVisits { get; set; }
         public Hause_Details? HauseDetails { get; set; }
 
     }

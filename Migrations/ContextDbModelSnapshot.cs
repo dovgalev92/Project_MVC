@@ -58,6 +58,8 @@ namespace Project_MVC.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("DataVisits");
                 });
 
@@ -140,9 +142,6 @@ namespace Project_MVC.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DataVisitsId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("HauseDetailsId")
                         .HasColumnType("int");
 
@@ -175,8 +174,6 @@ namespace Project_MVC.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("DataVisitsId");
-
                     b.HasIndex("HauseDetailsId");
 
                     b.HasIndex("LocalityId");
@@ -184,6 +181,17 @@ namespace Project_MVC.Migrations
                     b.HasIndex("StreetId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Project_MVC.Entity.DataVisits", b =>
+                {
+                    b.HasOne("Project_MVC.Entity.User", "User")
+                        .WithMany("DataVisits")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Project_MVC.Entity.Street", b =>
@@ -203,10 +211,6 @@ namespace Project_MVC.Migrations
                         .WithMany("User")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Project_MVC.Entity.DataVisits", "DataVisits")
-                        .WithMany("User")
-                        .HasForeignKey("DataVisitsId");
-
                     b.HasOne("Project_MVC.Entity.Hause_Details", "HauseDetails")
                         .WithMany("User")
                         .HasForeignKey("HauseDetailsId");
@@ -221,8 +225,6 @@ namespace Project_MVC.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("DataVisits");
-
                     b.Navigation("HauseDetails");
 
                     b.Navigation("Locality");
@@ -231,11 +233,6 @@ namespace Project_MVC.Migrations
                 });
 
             modelBuilder.Entity("Project_MVC.Entity.Category", b =>
-                {
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Project_MVC.Entity.DataVisits", b =>
                 {
                     b.Navigation("User");
                 });
@@ -255,6 +252,11 @@ namespace Project_MVC.Migrations
             modelBuilder.Entity("Project_MVC.Entity.Street", b =>
                 {
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Project_MVC.Entity.User", b =>
+                {
+                    b.Navigation("DataVisits");
                 });
 #pragma warning restore 612, 618
         }
