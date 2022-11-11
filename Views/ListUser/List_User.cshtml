@@ -57,7 +57,27 @@
 
                         <!--Модальное окно-->
                         <!--Кнопка удалить Delete-->
-                        <div class="modal fade" id="exampleModel-@user.User_Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+                        <div class="modal fade" id="exampleModel-@user.User_Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Операция удаления</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>Вы действительно хотите удалить <b>@user.Surname @user.Name @user.Patronymic?<b/></h4>
+                                        <h5>Подтвердив данное действие, данные будут утеряны</h5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form asp-action="Delete_User">
+                                            <input type="hidden" name="id" value="@user.User_Id" />
+                                            <input type="submit" class="btn btn-primary" value="Удалить" />
+                                            <input type="submit" class="btn btn-secondary" data-bs-dismiss="modal" value="Отменить" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </td>
