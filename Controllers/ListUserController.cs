@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project_MVC.Context_DataBase;
@@ -7,6 +8,7 @@ using Project_MVC.Models;
 
 namespace Project_MVC.Controllers
 {
+    [Authorize]
     public class ListUserController : Controller
     {
         private readonly ContextDb context;
