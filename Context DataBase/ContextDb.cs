@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_MVC.Entity;
+using Project_MVC.Entity.AccessUsers;
 
 namespace Project_MVC.Context_DataBase
 {
@@ -12,5 +13,6 @@ namespace Project_MVC.Context_DataBase
         public DbSet<Street> Streets { get; set; }
         public DbSet<DataVisits> DataVisits { get; set; }
         public DbSet<Hause_Details> Hause_Details { get; set; }
+        public DbSet<LogInUser> LogInUsers { get; set; }
     }
 }
