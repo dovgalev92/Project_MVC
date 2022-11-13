@@ -241,5 +241,7 @@ label {
     line-height:23px;
     width:0px;
     transition: 0.4s;
-
+}
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
 }

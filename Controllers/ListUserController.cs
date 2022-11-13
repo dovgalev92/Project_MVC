@@ -141,6 +141,11 @@ namespace Project_MVC.Controllers
             }
             return View(data);
         }
+        public IActionResult HausDetails()
+        {
+            return View();
+        }
+        
 
     }
 }
