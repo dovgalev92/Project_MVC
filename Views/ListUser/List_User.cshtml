@@ -15,7 +15,7 @@
     </div>
 }
 <body>
-    <a asp-action="Create" class="btn-main-create">Добавить гражданина</a> <a asp-action="HausDetails" class="btn-main-create" style="margin-left:20px">Добавить детали домовладения</a>
+    <a asp-action="Create" class="btn-main-create">Добавить гражданина</a> <a asp-action="Add_DateOfVisits" class="btn-main-create" style="margin-left:20px">Добавить дату посещения</a> <a asp-action="" class="btn btn-danger" style="margin-left: 740px">Выйти</a>
     <br />
     <br />
     <p>
@@ -39,7 +39,7 @@
                 <th>@Html.DisplayNameFor(model => model.Number_Haus)</th>
                 <th>@Html.DisplayNameFor(model => model.Category.Title_Category)</th>
                 <th>@Html.DisplayNameFor(model => model.Status_Visits)</th>
-                <th style="width:17%">Управление</th>
+                <th style="width:12%">Управление</th>
             </tr>
         </thead>
         <tbody>
@@ -67,11 +67,8 @@
                         <span class="promt" data-bs-placement="top" title="Просмотр дат посещения и заметки">
                             <a asp-action="Viewing_Date" asp-route-id="@user.User_Id" class="btn btn-success"><i class="bi bi-chat-square-text"></i></a>
                         </span>
-                        <span class="promt" data-bs-placement="top" title="Добавление дат посещения">
-                            <a asp-action="Add_DateOfVisits" class="btn btn-info"><i class="bi bi-calendar-date-fill"></i></a>
-                        </span>
+                       
                         
-
                         <!--Модальное окно-->
                         <!--Кнопка удалить Delete-->
                         <div class="modal fade" id="exampleModel-@user.User_Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
