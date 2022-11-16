@@ -15,7 +15,31 @@
     </div>
 }
 <body>
-    <a asp-action="Create" class="btn-main-create">Добавить гражданина</a> <a asp-action="Add_DateOfVisits" class="btn-main-create" style="margin-left:20px">Добавить дату посещения</a> <a asp-action="" class="btn btn-danger" style="margin-left: 740px">Выйти</a>
+    <a asp-action="Create" class="btn-main-create">Добавить гражданина</a> <a asp-action="Add_DateOfVisits" class="btn-main-create" style="margin-left:20px">Добавить дату посещения</a> 
+    <span class="promt" data-bs-placement="right" title="Выйти">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#ExModel" class="btn btn- btn-outline-danger" style="margin-left: 810px"><i class="bi bi-box-arrow-left"></i></a>
+    </span>
+    <!--Модальное окно ExitProgramm-->
+    <div class="modal fade" id="ExModel" tabindex="-1" aria-labelledby="ExitModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ExitModalLabel">Операция удаления</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы действительно хотите выйти с приложения?</p>
+                </div>
+                <div class="modal-footer">
+                    <form asp-action="ExitProgramm">
+                        <input type="submit" value="Выйти" class="btn btn-danger">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Отмена</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Окончание-->
     <br />
     <br />
     <p>
