@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_MVC.Context_DataBase;
@@ -61,11 +62,6 @@ namespace Project_MVC.Controllers
         }
 
 
-
-
-
-
-
         public async Task AuthenticationUser(string login)
         {
             var claim = new List<Claim>
@@ -77,6 +73,12 @@ namespace Project_MVC.Controllers
             await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(identity));
 
         }
-
+        public async Task<IActionResult> ExitProgramm()
+        {
+            await HttpContext.SignOutAsync("Cookies");
+            return RedirectToAction("LogInUser", "Access");
+        }
+       
+       
     }
 }
