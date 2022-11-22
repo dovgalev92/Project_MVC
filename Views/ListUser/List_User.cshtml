@@ -15,9 +15,9 @@
     </div>
 }
 <body>
-    <a asp-action="Create" class="btn-main-create">Добавить гражданина</a> <a asp-action="Add_DateOfVisits" class="btn-main-create" style="margin-left:20px">Добавить дату посещения</a> 
+    <a asp-action="Create" class="btn-main-create">Добавить гражданина</a> 
     <span class="promt" data-bs-placement="right" title="Выйти">
-    <a href="#" data-bs-toggle="modal" data-bs-target="#ExModel" class="btn btn- btn-outline-danger" style="margin-left: 810px"><i class="bi bi-box-arrow-left"></i></a>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#ExModel" class="btn btn- btn-outline-danger" style="margin-left: 1000px"><i class="bi bi-box-arrow-left"></i></a>
     </span>
     <!--Модальное окно ExitProgramm-->
     <div class="modal fade" id="ExModel" tabindex="-1" aria-labelledby="ExitModalLabel" aria-hidden="true">
@@ -63,7 +63,7 @@
                 <th>@Html.DisplayNameFor(model => model.Number_Haus)</th>
                 <th>@Html.DisplayNameFor(model => model.Category.Title_Category)</th>
                 <th>@Html.DisplayNameFor(model => model.Status_Visits)</th>
-                <th style="width:12%">Управление</th>
+                <th style="width:17%">Управление</th>
             </tr>
         </thead>
         <tbody>
@@ -90,6 +90,9 @@
                         </span>
                         <span class="promt" data-bs-placement="top" title="Просмотр дат посещения и заметки">
                             <a asp-action="Viewing_Date" asp-route-id="@user.User_Id" class="btn btn-success"><i class="bi bi-chat-square-text"></i></a>
+                        </span>
+                        <span class="promt" data-bs-placement="top" title="Просмотр дат посещения и заметки">
+                            <a asp-action="Add_DateOfVisits" asp-route-id="@user.User_Id" class="btn btn-success">Добавить дату</a>
                         </span>
                        
                         

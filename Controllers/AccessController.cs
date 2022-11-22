@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Project_MVC.Context_DataBase;
 using Project_MVC.Entity.AccessUsers;
 using Project_MVC.Models;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Project_MVC.Controllers
 {
@@ -28,14 +31,20 @@ namespace Project_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var person = await context.LogInUsers.FirstOrDefaultAsync(u => u.Login.Equals(user.Login)
-                             && u.Password.Equals(user.Password));
+                using (SHA256 sHA256 = SHA256.Create()) {
 
-                if (person!= null)
-                {
-                    await AuthenticationUser(user.Login);
-                    return RedirectToAction("List_User", "ListUser");
-                }
+                    var bytes = sHA256.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
+                    var getbytes = BitConverter.ToString(bytes).Replace("-", "").ToUpper();
+
+                    var person = context.LogInUsers.FirstOrDefault(p => p.Password.Equals(getbytes));
+
+                    if (person != null)
+                    {
+                        await AuthenticationUser(user.Login);
+                        return RedirectToAction("List_User", "ListUser");
+                    }
+                };
+
             }
             return View(model);
         }
@@ -47,11 +56,17 @@ namespace Project_MVC.Controllers
                 var person = await context.LogInUsers.Where(u => u.Login.Equals(user.Login)).FirstOrDefaultAsync();
                 if(person == null)
                 {
-                    context.LogInUsers.Add(new LogInUser
+                    using (SHA256 sha = SHA256.Create())
                     {
-                        Login = user.Login,
-                        Password = user.Password
-                    });
+                        var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
+                        var sha256 = BitConverter.ToString(bytes).Replace("-", "").ToUpper();
+
+                        context.LogInUsers.Add(new LogInUser
+                        {
+                            Login = user.Login,
+                            Password = sha256
+                        });
+                    }
                     await context.SaveChangesAsync();
 
                     await AuthenticationUser(user.Login);

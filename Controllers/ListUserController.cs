@@ -19,6 +19,7 @@ namespace Project_MVC.Controllers
             context = _context;
         }
 
+       
         public async Task<IActionResult> List_User(string search)
         {
             var result_search = from user in context.Users select user;
@@ -128,20 +129,23 @@ namespace Project_MVC.Controllers
             var list_date = from date in context.DataVisits.Where(i => i.UserId == id) select date;
             return View(list_date); 
         }
-        public IActionResult Add_DateOfVisits()
+        public async Task<IActionResult> Add_DateOfVisits(int?id)
         {
-            ViewData["Users"] = new SelectList(context.Set<User>(),"User_Id", "Surname");
-            return View();
+            model.User = await context.Users.FindAsync(id);
+
+            //ViewData["Users"] = new SelectList(context.Set<User>(),"User_Id", "Surname");
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Add_DateOfVisits(DataVisits data)
         {
+
             if (ModelState.IsValid)
             {
                 context.DataVisits.Add(data);
                 await context.SaveChangesAsync();
             }
-            return View(data);
+            return View(model);
         }
 
     }
