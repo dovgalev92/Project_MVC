@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project_MVC.Context_DataBase;
@@ -20,7 +21,7 @@ namespace Project_MVC.Controllers
         }
 
        
-        public async Task<IActionResult> List_User(string search)
+        public async Task<IActionResult> List_User(string? search, int page = 0)
         {
             var result_search = from user in context.Users select user;
             if (!string.IsNullOrWhiteSpace(search))
@@ -29,7 +30,16 @@ namespace Project_MVC.Controllers
                     .Include(c => c.Category).Include(l => l.Locality).Include(s => s.Street);
                 return View(await result_search.ToListAsync());
             }
-            return View(await context.Users.Include(c => c.Category).Include(l => l.Locality).Include(s => s.Street).ToListAsync());
+            else
+            {
+                const int pageSize = 6;
+                var result_list = await context.Users.Include(p => p.Category).Include(l => l.Locality).Include(s => s.Street).ToListAsync();
+                var count = result_list.Count();
+                var data = result_list.Skip(page * pageSize).Take(pageSize).ToList();
+                this.ViewBag.MaxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+                this.ViewBag.Page = page;
+                return View(data);
+            }
         }
         public async Task<IActionResult> Create()
         {

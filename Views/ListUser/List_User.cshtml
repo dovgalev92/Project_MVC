@@ -129,6 +129,20 @@
     </table>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <nav aria-label="Page navigation example" class="btn-center">
+        <ul class="pagination">
+                @if (ViewBag.Page > 0)
+                {
+                <li class="page-item"><a href="@Url.Action("List_User", new { page = ViewBag.Page - 1 })" class="page-link">Предыдущая</a></li>
+                }
+                @if (ViewBag.Page < ViewBag.MaxPage)
+                {
+                <li class="page-item"><a href="@Url.Action("List_User", new { page = ViewBag.Page + 1 })" class="page-link">Следующая</a></li>
+                }
+        </ul>
+    </nav>
+
 </body>
 
 <script>
