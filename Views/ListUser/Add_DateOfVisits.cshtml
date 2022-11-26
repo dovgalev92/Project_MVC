@@ -1,4 +1,4 @@
-﻿@model Project_MVC.Entity.DataVisits
+﻿@model Project_MVC.Models.CreateModel
 @{
     ViewData["Title"] = "Добавление дат";
 }
@@ -15,19 +15,26 @@
         <div class="col-lg-4">
             <form asp-action="Add_DateOfVisits" class="form-center">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div data-value-key="id">
-                    <select asp-for="UserId" id="multipleSelect" name="UserId" placeholder="Начните поиск..." data-search="true" data-silent-initial-value-set="true" asp-items="ViewBag.Users">
-                        <option value=""></option>
-                    </select>
-                </div>
-                <br />
+                <input type="hidden" name="UserId" value="@Model.User.User_Id">
                 <div class="form-groupe-form">
-                    <input type="date" asp-for="Date" class="form-controles-create" />
+                    <input type="text" asp-for="User.Surname" class="form-controles-create">
+                </div>
+                <br/>
+                <div class="form-groupe-form">
+                    <input type="text" asp-for="User.Name" class="form-controles-create">
+                </div>
+                <br/>
+                <div class="form-groupe-form">
+                    <input type="text" asp-for="User.Patronymic" class="form-controles-create">
+                </div>
+                <br/>
+                <div class="form-groupe-form">
+                    <input type="date" name="Date" class="form-controles-create" />
                     <label>Дата посещения:</label>
                 </div>
                 <br />
                 <div class="form-groupe-form">
-                    <textarea asp-for="Notes" placeholder="Комментарий, если они требуются. Например: неисправность печного отопления" class="form-controles-create"></textarea>
+                    <textarea name="Notes" placeholder="Комментарий, если они требуются. Например: неисправность печного отопления" class="form-controles-create"></textarea>
                     <label>Заметки</label>
                 </div>
                 <br />
@@ -38,11 +45,4 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript" src="~/js/virtual-select.js"></script>
-    <script type="text/javascript">
-        VirtualSelect.init({
-            ele: '#multipleSelect'
-        });
-    </script>
-    <script src="js/site.js"></script>
 </body>

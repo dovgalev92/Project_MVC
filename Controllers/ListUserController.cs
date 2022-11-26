@@ -21,7 +21,7 @@ namespace Project_MVC.Controllers
         }
 
        
-        public async Task<IActionResult> List_User(string? search, int page = 0)
+        public async Task<IActionResult> List_User(string? search,int page = 0)
         {
             var result_search = from user in context.Users select user;
             if (!string.IsNullOrWhiteSpace(search))
@@ -32,7 +32,7 @@ namespace Project_MVC.Controllers
             }
             else
             {
-                const int pageSize = 6;
+                const int pageSize = 8;
                 var result_list = await context.Users.Include(p => p.Category).Include(l => l.Locality).Include(s => s.Street).ToListAsync();
                 var count = result_list.Count();
                 var data = result_list.Skip(page * pageSize).Take(pageSize).ToList();
@@ -140,22 +140,26 @@ namespace Project_MVC.Controllers
             return View(list_date); 
         }
         public async Task<IActionResult> Add_DateOfVisits(int?id)
-        {
+        {    
             model.User = await context.Users.FindAsync(id);
 
-            //ViewData["Users"] = new SelectList(context.Set<User>(),"User_Id", "Surname");
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add_DateOfVisits(DataVisits data)
+        public async Task<IActionResult> Add_DateOfVisits([Bind("Date,Notes,UserId")] DataVisits data)
         {
 
             if (ModelState.IsValid)
             {
                 context.DataVisits.Add(data);
                 await context.SaveChangesAsync();
+                return RedirectToAction("List_User");
             }
-            return View(model);
+            else
+            {
+                return RedirectToAction(nameof(Add_DateOfVisits));
+            }
+         
         }
 
     }
