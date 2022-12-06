@@ -5,9 +5,11 @@ using Project_MVC.Entity;
 using Project_MVC.Models;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Project_MVC.Controllers
 {
+    [Authorize]
     public class SettingController : Controller
     {
         private readonly ContextDb context;

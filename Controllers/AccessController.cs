@@ -93,7 +93,5 @@ namespace Project_MVC.Controllers
             await HttpContext.SignOutAsync("Cookies");
             return RedirectToAction("LogInUser", "Access");
         }
-       
-       
     }
 }

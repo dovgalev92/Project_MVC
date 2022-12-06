@@ -20,15 +20,15 @@ namespace Project_MVC.Controllers
             context = _context;
         }
 
-       
-        public async Task<IActionResult> List_User(string? search,int page = 0)
+
+        public async Task<IActionResult> List_User(string? search, int page = 0)
         {
-            var result_search = from user in context.Users select user;
+            var result_searchUser = from user in context.Users select user;
             if (!string.IsNullOrWhiteSpace(search))
             {
-                result_search = context.Users.Where(u => u.Name.Contains(search) || u.Surname.Contains(search) || u.Patronymic.Contains(search))
-                    .Include(c => c.Category).Include(l => l.Locality).Include(s => s.Street);
-                return View(await result_search.ToListAsync());
+                result_searchUser = context.Users.Where(u => u.Name.Contains(search) || u.Surname.Contains(search) || u.Patronymic.Contains(search))
+                    .Include(c => c.Category).Include(l => l.Locality).Include(s => s.Street).AsNoTracking();
+                return View(await result_searchUser.ToListAsync());
             }
             else
             {
@@ -43,7 +43,7 @@ namespace Project_MVC.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            await GetData_DBContext(true);
+            await GetData_DBContext();
             return View(model);
         }
         [HttpPost]
@@ -60,56 +60,25 @@ namespace Project_MVC.Controllers
 
         public IEnumerable<SelectListItem> GetStreet(int? ID)
         {
-            if(ID != 0)
+            if (ID != 0)
             {
                 List<SelectListItem> selects_street = context.Streets.Where(s => s.LocalityId == ID).OrderBy(n => n.Title_Street)
                     .Select(n => new SelectListItem()
                     {
                         Value = n.Id.ToString(),
                         Text = n.Title_Street
-                    }).ToList();
-                 
+                    }).AsNoTracking().ToList();
+
                 return selects_street;
             }
             return Enumerable.Empty<SelectListItem>();
 
         }
-        public async Task GetData_DBContext(bool action)
-        {
-            if (action)
-            {
-                model.User = new User();
-                List<SelectListItem> locality = await context.Localities.OrderBy(n => n.Title_Locality)
-                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Locality }).ToListAsync();
-                model.Locality = locality;
-
-                List<SelectListItem> category = await context.Categories.OrderBy(n => n.Title_Category)
-                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
-                model.Category = category;
-
-                model.Street = new List<SelectListItem>();
-            }
-            else
-            {
-                List<SelectListItem> locality = await context.Localities.OrderBy(n => n.Title_Locality)
-                   .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Locality }).ToListAsync();
-                model.Locality = locality;
-
-                List<SelectListItem> category = await context.Categories.OrderBy(n => n.Title_Category)
-                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
-                model.Category = category;
-
-
-                List<SelectListItem> street = await context.Streets.OrderBy(n => n.Title_Street)
-                    .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Street }).ToListAsync();
-                model.Street = street;
-            }
-        } // метод, который подтягивает данные с бд
         public async Task<IActionResult> Data_Update(int? id)
         {
             model.User = await context.Users.FirstOrDefaultAsync(u => u.User_Id == id);
-            await GetData_DBContext(false);
-            if(model.User!= null)
+            await GetData_of_UpadateUser();
+            if (model.User != null)
             {
                 return View(model);
             }
@@ -133,14 +102,14 @@ namespace Project_MVC.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(List_User));
         }
-       
-        public async Task<IActionResult> Viewing_Date(int? id)
+
+        public IActionResult Viewing_Date(int? id)
         {
             var list_date = from date in context.DataVisits.Where(i => i.UserId == id) select date;
-            return View(list_date); 
+            return View(list_date);
         }
-        public async Task<IActionResult> Add_DateOfVisits(int?id)
-        {    
+        public async Task<IActionResult> Add_DateOfVisits(int? id)
+        {
             model.User = await context.Users.FindAsync(id);
 
             return View(model);
@@ -159,8 +128,37 @@ namespace Project_MVC.Controllers
             {
                 return RedirectToAction(nameof(Add_DateOfVisits));
             }
-         
+
         }
+        public async Task GetData_of_UpadateUser()
+        {
+            List<SelectListItem> locality = await context.Localities.OrderBy(n => n.Title_Locality)
+                   .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Locality }).ToListAsync();
+            model.Locality = locality;
+
+            List<SelectListItem> category = await context.Categories.OrderBy(n => n.Title_Category)
+                .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
+            model.Category = category;
+
+
+            List<SelectListItem> street = await context.Streets.OrderBy(n => n.Title_Street)
+                .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Street }).ToListAsync();
+            model.Street = street;
+        }// метод возвращает данные с бд при обновлении гражданина в методе Data_Update
+        public async Task GetData_DBContext()
+        {
+            model.User = new User();
+            List<SelectListItem> locality = await context.Localities.OrderBy(n => n.Title_Locality)
+                .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Locality }).ToListAsync();
+            model.Locality = locality;
+
+            List<SelectListItem> category = await context.Categories.OrderBy(n => n.Title_Category)
+                .Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.Title_Category }).ToListAsync();
+            model.Category = category;
+
+            model.Street = new List<SelectListItem>();
+
+        } // метод возвращающий данные с бд(список населенных пунктов, список категорий)
 
     }
 }
