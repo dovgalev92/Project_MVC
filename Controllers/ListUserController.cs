@@ -62,7 +62,7 @@ namespace Project_MVC.Controllers
         {
             if (ID != 0)
             {
-                List<SelectListItem> selects_street = context.Streets.Where(s => s.LocalityId == ID).OrderBy(n => n.Title_Street)
+                List<SelectListItem> selects_street = context.Streets.Where(s => s.LocalityId.Equals(ID)).OrderBy(n => n.Title_Street)
                     .Select(n => new SelectListItem()
                     {
                         Value = n.Id.ToString(),

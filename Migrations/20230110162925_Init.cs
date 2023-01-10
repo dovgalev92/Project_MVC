@@ -23,22 +23,6 @@ namespace Project_MVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hause_Details",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Heating_System = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Fire_Detector = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hause_Details", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Localities",
                 columns: table => new
                 {
@@ -49,6 +33,20 @@ namespace Project_MVC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Localities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LogInUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LogInUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,8 +83,7 @@ namespace Project_MVC.Migrations
                     Status_Visits = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     LocalityId = table.Column<int>(type: "int", nullable: true),
-                    StreetId = table.Column<int>(type: "int", nullable: true),
-                    HauseDetailsId = table.Column<int>(type: "int", nullable: true)
+                    StreetId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,11 +92,6 @@ namespace Project_MVC.Migrations
                         name: "FK_Users_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Users_Hause_Details_HauseDetailsId",
-                        column: x => x.HauseDetailsId,
-                        principalTable: "Hause_Details",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Localities_LocalityId",
@@ -150,11 +142,6 @@ namespace Project_MVC.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_HauseDetailsId",
-                table: "Users",
-                column: "HauseDetailsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_LocalityId",
                 table: "Users",
                 column: "LocalityId");
@@ -171,13 +158,13 @@ namespace Project_MVC.Migrations
                 name: "DataVisits");
 
             migrationBuilder.DropTable(
+                name: "LogInUsers");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Hause_Details");
 
             migrationBuilder.DropTable(
                 name: "Streets");

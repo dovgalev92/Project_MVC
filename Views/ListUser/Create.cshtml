@@ -38,7 +38,7 @@
         <br />
         <div class="form-groupe-form">
             <select id="lstStreet" class="form-controles-create" asp-for="User.StreetId" asp-items="@Model.Street" required>
-                <option></option>
+                <option selected>Выберите улицу</option>
             </select>
             <label asp-for="User.StreetId">Улица:</label>
         </div>
@@ -84,7 +84,7 @@
                             if (streetse != null && !jQuery.isEmptyObject(streetse)) {
                                 streetSelect.append($('<option/>', {
                                     value: null,
-                                    text: "Выберите населенный пункт"
+                                    text: "Выберите улицу"
                                 }));
                                 $.each(streetse, function (index, street) {
                                     streetSelect.append($('<option/>', {

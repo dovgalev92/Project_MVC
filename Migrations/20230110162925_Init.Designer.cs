@@ -12,8 +12,8 @@ using Project_MVC.Context_DataBase;
 namespace Project_MVC.Migrations
 {
     [DbContext(typeof(ContextDb))]
-    [Migration("20221116192059_DeleteTableDetails")]
-    partial class DeleteTableDetails
+    [Migration("20230110162925_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,11 @@ namespace Project_MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Login")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
